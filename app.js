@@ -1,11 +1,14 @@
 'use strict';
+const memo = new Map();
+memo.set(0, 0);
+memo.set(1, 1);
 function fib(n) {
-    if (n === 0) {
-        return 0;
-    } else if (n === 1) {
-        return 1;
+    if (memo.has(n)) {
+        return memo.get(n);
     }
-    return fib(n - 1) + fib(n - 2); //再帰
+    const value = fib(n - 1) + fib(n - 2);
+    memo.set(n, value);
+    return value;
 }
 const length = 40;
 for (let i = 0; i < length; i++) {
@@ -13,6 +16,6 @@ for (let i = 0; i < length; i++) {
 }
 
 /* n = 40 での実行時間
-real    0m8.629s
-user    0m8.596s
-sys     0m0.024s */
+real    0m0.222s
+user    0m0.200s
+sys     0m0.012s */
